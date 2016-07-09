@@ -8,4 +8,4 @@ def register_blueprints(app) :
 register_blueprints(app)
 
 if __name__ == '__main__' :
-    app.run(DEBUG=True)
+    app.run()
