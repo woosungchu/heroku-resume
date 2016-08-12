@@ -2,12 +2,15 @@ from flask import Flask
 from flask_mongoengine import MongoEngine
 import os 
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT,'static/')
+
 app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
 
 db = MongoEngine(app)
 
-app._static_folder = os.path.abspath("static")
+app._static_folder = STATIC_ROOT
 
 app.debug =True
 
