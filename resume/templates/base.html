@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>스텝이꼬이면그것이탱고</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% block subHead %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-transparent">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-nav">
+				&#9776;
+			</button>
+			<a class="navbar-brand" href="/">스텝이꼬이면그것이탱고</a>
+		</div>
+		<div id="site-nav" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="#services"><i class="fa fa-cog"></i>Specialties</a>
+				</li>
+				<li>
+					<a href="#about"><i class="fa fa-graduation-cap"></i>Profile</a>
+				</li>
+				<li>
+					<a href="#portfolio"><i class="fa fa-briefcase"></i>Portfolio</a>
+				</li>
+				<li>
+					<a href="#contact"><i class="fa fa-envelope"></i>Contact</a>
+				</li>
+			</ul>
+		</div><!--End navbar-collapse -->
+	</div>
+</nav>
+<div class="container">
+		{% block content %}{% endblock %}
+</div>
+</body>
+</html>

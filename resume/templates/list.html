@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test1</title>
-</head>
-<body>
-<h2>{{ welcome }}</h2>
-</body>
-</html>
+{% extends "base.html" %}
+{% block subHead %}
+<style>
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+<div class="col-md-6">
+	<h2>{{ welcome }}</h2>
+</div>
+<div class="col-md-6">
+	<h2>{{ welcome }}</h2>
+</div>
+</div>
+{% endblock %}
