@@ -1,0 +1,37 @@
+{% import "tumblelog/_forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block subHead %}
+<style>
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+<div class="col-md-8">
+	<h2>{{ welcome }}</h2>
+	<div>
+		<h3>Add a Post</h3>
+		<form action="." method="post">
+			{{forms.render(form)}}
+			<div class="actions">
+				<input type="submit" class="btn primary" value="post">
+			</div>
+		</form>
+	</div>
+	<div>
+	{% for post in posts %}
+      <h2><a href="#">{{ post.title }}</a></h2>
+      <p>{{ post.body|truncate(100) }}</p>
+      <p>
+        {{ post.created_at.strftime('%H:%M %Y-%m-%d') }} |
+      </p>
+    {% endfor %}
+	</div>
+</div>
+<div class="col-md-4 hidden-sm">
+	<h2>{{ welcome }}</h2>
+</div>
+</div>
+{% endblock %}
