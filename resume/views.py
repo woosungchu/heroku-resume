@@ -1,7 +1,7 @@
 from flask.views import MethodView
 from flask import Blueprint, render_template
 
-index = Blueprint('index',__name__,template_folder='templates')
+index = Blueprint('index',__name__,template_folder='_templates')
 
 class Index(MethodView):
     def get(self):
