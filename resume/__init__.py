@@ -2,22 +2,24 @@ from flask import Flask
 from flask_mongoengine import MongoEngine
 import os 
 
+#init
+app = Flask(__name__)
+
 #Global Variables
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT,'_static/')
 
-#init
-app = Flask(__name__)
-
-#config
-app.config.from_object('config.DevelopmentConfig')
-
-#database
-db = MongoEngine(app)
 #static
 app._static_folder = STATIC_ROOT
 
-app.debug =True
+#config
+CONFIG_TYPE = os.environ.get('CONFIG_TYPE','DevelopmentConfig');
+app.config.from_object('config.'+ CONFIG_TYPE)
+app.debug = app.config.get('DEBUG')
+
+#database
+db = MongoEngine(app)
+
 
 def register_blueprints(app) :
     from resume.views import index
