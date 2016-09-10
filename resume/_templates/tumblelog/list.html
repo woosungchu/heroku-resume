@@ -14,11 +14,9 @@
 	<div>
 	{% for post in posts %}
 		<div class="clearfix">
-	      <h2><a href="{{ url_for('tumblelog.detail', title=post.title) }}">{{ post.title }}</a></h2>
+	      <h3><a href="{{ url_for('tumblelog.detail', title=post.title) }}">{{ post.title }}</a></h3>
 	      <p>{{ post.body|striptags|truncate(300,True) }}</p>
-	      <p>
-	        {{ post.created_at.strftime('%H:%M %Y-%m-%d') }} |
-	      </p>
+	      <p>{{ post.created_at.strftime('%Y.%m.%d %H:%M ') }}</p>
     	</div>
     {% endfor %}
 	</div>
