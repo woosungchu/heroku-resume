@@ -7,11 +7,8 @@
 
 {% block content %}
 <div class="row">
-<div class="col-md-8">
-	<h2>{{ welcome }}</h2>
-</div>
-<div class="col-md-4 hidden-sm">
-	<h2>{{ welcome }}</h2>
+<div class="jumbotron">
+	<img src="{{ url_for('static', filename='images/background.jpg') }}" width="100%" height="auto">
 </div>
 </div>
 {% endblock %}

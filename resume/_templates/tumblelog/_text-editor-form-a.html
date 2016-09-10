@@ -1,0 +1,43 @@
+{% macro render(form) -%}
+<div id="a-text-editor" class="text-editor">
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		var $textEditor = $('#a-text-editor')
+		var $content = $('#edit-body',$textEditor);
+		var obj = {	body:"", title:"", tags:""  };
+		
+		$('#submit-editor').on('click',function(){
+			//data-binding
+			obj.body = $content.html();
+			obj.title = $content.text().split(' ',5).join(' ');
+			obj.tags = "";
+			
+			for(var key in obj){
+				$('[name='+key+']',$textEditor).val(obj[key]);
+				console.log($('[name='+key+']',$textEditor).val());
+			}
+			//submit
+			$('form',$textEditor).submit();
+		});
+		
+	})//end doc-ready
+})(jQuery)
+</script>
+	<div class="hidden">
+		<form action="." method="post">
+			<fieldset>
+			{% for field in form %}
+			  {{ field() }}
+			{% endfor %}
+			</fieldset>
+		</form>
+	</div><!--end hidden -->
+	
+	<div id="edit-body" contenteditable="true"></div>
+	<div class="btn-line clearfix">
+<!-- 		<input type="text" placeholder="#AddTags"> -->
+		<a href="#" id="submit-editor" class="btn btn-a float-right">WRITE</a>
+	</div>
+</div><!-- end text-editor -->
+{% endmacro %}

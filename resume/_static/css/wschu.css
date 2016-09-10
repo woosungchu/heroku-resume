@@ -1,0 +1,47 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1.4em;
+/* 	background: #eeeeee; */
+	background-color: rgba(230,204,255,0.3);
+	color: #333333;
+/* 	width: 520px; */
+	margin: 0 auto;
+}
+
+/* common */
+.hidden{
+	visibility: hidden;
+}
+.float-right{
+	float:right;
+}	
+
+/* btn-line */
+.btn-line a.btn {
+	margin : 5px 10px;
+}
+.btn-a{
+	background-color: #ccff99;
+    font-weight: bold;
+    color: black;
+}
+
+
+
+/* editor */
+.text-editor{
+	border: 1px solid rgba(0,0,0,.09);
+	background-color: white;
+	padding: 5px 10px;
+}
+.text-editor > div[contenteditable="true"] {
+	min-height: 120px;
+	padding: 5px 0px;
+	outline:0;
+}
