@@ -13,16 +13,20 @@
 	
 	<div>
 	{% for post in posts %}
-      <h2><a href="#">{{ post.title }}</a></h2>
-      <p>{{ post.body|striptags|truncate(300,True) }}</p>
-      <p>
-        {{ post.created_at.strftime('%H:%M %Y-%m-%d') }} |
-      </p>
+		<div class="clearfix">
+	      <h2><a href="{{ url_for('tumblelog.detail', title=post.title) }}">{{ post.title }}</a></h2>
+	      <p>{{ post.body|striptags|truncate(300,True) }}</p>
+	      <p>
+	        {{ post.created_at.strftime('%H:%M %Y-%m-%d') }} |
+	      </p>
+    	</div>
     {% endfor %}
 	</div>
 </div>
 <div class="col-md-4 hidden-sm">
-	<h2>{{ welcome }}</h2>
+	<a href="/">
+		<h2>{{ welcome }}</h2>
+	</a>
 </div>
 </div>
 {% endblock %}

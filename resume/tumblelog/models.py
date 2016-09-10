@@ -7,6 +7,7 @@ class Post(db.Document):
     title = db.StringField(max_length=255, required=True)
     tags = db.StringField(max_length=255)
     body = db.StringField(required=True)
+    author = db.StringField(max_length=30, required=True, default="guest")
 
     def get_absolute_url(self):
         return url_for('post', kwargs={"tags": self.tags})
@@ -16,7 +17,7 @@ class Post(db.Document):
 
     meta = {
         'allow_inheritance': True,
-        'indexes': ['-created_at', 'tags'],
+        'indexes': ['-created_at', 'title','author'],
         'ordering': ['-created_at']
     }
     

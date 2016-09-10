@@ -39,7 +39,20 @@ class ListView(MethodView):
             return redirect(url_for('tumblelog.list'))
         return render_template(ROOT+'list.html', **context)
         
+class DetailView(MethodView):
 
+    
+    def get_context(self,title):
+        post = Post.objects.get_or_404(title=title)
+    
+        context = {
+            "post":post
+        }
+        return context
+
+    def get(self, title):
+        post = Post.objects.get_or_404(title=title)
+        return render_template(ROOT+'detail.html', post=post)
 
 tumblelog.add_url_rule(ROOT,view_func= ListView.as_view('list'))
-
+tumblelog.add_url_rule(ROOT+'<title>/',view_func= DetailView.as_view('detail'))
