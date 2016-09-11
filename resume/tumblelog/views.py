@@ -40,7 +40,6 @@ class ListView(MethodView):
         return render_template(ROOT+'list.html', **context)
         
 class DetailView(MethodView):
-
     
     def get_context(self,title):
         post = Post.objects.get_or_404(title=title)

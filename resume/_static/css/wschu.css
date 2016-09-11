@@ -22,6 +22,13 @@ body .row > div {
 .hidden{
 	visibility: hidden;
 }
+.error-msg{
+	color : red;
+}
+.float-left{
+	float:left;
+	margin : 3px 5px;
+}
 .float-right{
 	float:right;
 	margin : 3px 5px;
@@ -50,3 +57,11 @@ body .row > div {
 	padding: 5px 0px;
 	outline:0;
 }
+
+/* new account */
+#new-account *{
+/* 	text-align :center; */
+}
+
+
+

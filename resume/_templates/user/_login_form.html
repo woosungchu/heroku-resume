@@ -1,0 +1,35 @@
+{% macro render(form) -%}
+<form id="form-login" action="." method="post">
+<fieldset>
+{% for field in form %}
+{% if field.type in ['CSRFTokenField', 'HiddenField'] %}
+  {{ field() }}
+{% else %}
+  <div class="clearfix {% if field.errors %}error{% endif %}">
+    {{ field.label }}
+    <div class="input">
+      {{ field() }}
+      {% if field.errors or field.help_text %}
+        <span class="help-inline">
+        {% if field.errors %}
+          {{ field.errors|join(' ') }}
+        {% else %}
+          {{ field.help_text }}
+        {% endif %}
+        </span>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+{% endfor %}
+	<div class="btn-line">
+		<a id="btn-new-user" class="btn btn-a" href="#" onclick="return false;">Submit</a>
+		{% with errors = get_flashed_messages() %}
+		  {% for msg in errors %}
+		      <span class="error-msg">{{ msg }}</span>
+		  {% endfor %}
+		{% endwith %}
+	</div>
+</fieldset>
+</form>
+{% endmacro %}

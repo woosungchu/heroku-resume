@@ -1,0 +1,16 @@
+{% import "user/_login_form.html" as forms %}
+{% extends "base.html" %}
+
+{% block subHead %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-8">
+	<div id="new-account">{{forms.render(form)}}</div>
+</div>
+<div class="col-md-4 hidden-sm">
+	<h2><a href="/">go back to root</a></h2>
+</div>
+</div>
+{% endblock %}

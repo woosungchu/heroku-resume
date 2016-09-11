@@ -19,7 +19,8 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#btn-nav-col">
 				&#9776;
 			</button>
-			<a class="navbar-brand" href="/">스텝이꼬이면그것이탱고</a>
+			<a class="navbar-brand" href="/"><strong>스텝이꼬이면그것이탱고</strong></a>
+			<span>Hi {% if session_user %} {{ session_user.name }} {% else %} guest {% endif %} </span>
 		</div>
 		<div id="btn-nav-col" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -32,9 +33,18 @@
 				<li>
 					<a href="#portfolio"><i class="fa fa-briefcase"></i>Portfolio</a>
 				</li>
+				{% if session_user %}
 				<li>
-					<a href="#contact"><i class="fa fa-envelope"></i>Contact</a>
+					<a href="{{ url_for('user.logout') }}">logout</a>
 				</li>
+				{% else %}
+				<li>
+					<a href="{{ url_for('user.login') }}">Sign In</a>
+				</li>
+				<li>
+					<a href="{{ url_for('user.new') }}">Sign Up</a>
+				</li>
+				{% endif %}
 			</ul>
 		</div><!--End navbar-collapse -->
 	</div>

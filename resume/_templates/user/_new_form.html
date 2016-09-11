@@ -1,0 +1,56 @@
+{% macro render(form) -%}
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		$('#btn-new-user').on('click',function(){
+			var $form = $('#form-new-user');
+			var password = $('input[name=password]', $form).val()
+			var password2 = $('input[name=password2]', $form).val()
+			
+			if(password == password2)
+				$form.submit();
+			else
+				alert('Both password is different')
+		});
+	})//end ready
+})(jQuery)
+</script>
+<form id="form-new-user" action="." method="post">
+<fieldset>
+{% for field in form %}
+{% if field.type in ['CSRFTokenField', 'HiddenField'] %}
+  {{ field() }}
+{% else %}
+  <div class="clearfix {% if field.errors %}error{% endif %}">
+    {{ field.label }}
+    <div class="input">
+      {{ field() }}
+      {% if field.errors or field.help_text %}
+        <span class="help-inline">
+        {% if field.errors %}
+          {{ field.errors|join(' ') }}
+        {% else %}
+          {{ field.help_text }}
+        {% endif %}
+        </span>
+      {% endif %}
+    </div>
+     {% if field.name =="password" %}
+	<div class="input">
+    	<input type="password" name="password2">
+    </div>      
+     {% endif %}
+  </div>
+{% endif %}
+{% endfor %}
+	<div class="btn-line">
+		<a id="btn-new-user" class="btn btn-a" href="#" onclick="return false;">Submit</a>
+		{% with errors = get_flashed_messages() %}
+		  {% for msg in errors %}
+		      <span class="error-msg">{{ msg }}</span>
+		  {% endfor %}
+		{% endwith %}
+	</div>
+</fieldset>
+</form>
+{% endmacro %}
