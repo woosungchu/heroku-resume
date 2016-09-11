@@ -37,7 +37,7 @@ class NewAccount(MethodView):
         return redirect(url_for('user.new'))
 
 class Login(MethodView):
-    form = model_form(User, only=['email', 'password'], field_args={'password': {'password':True}})
+    form = model_form(User, exclude=['created_at','name'], field_args={'password': {'password':True}})
     def get_context(self):
         form = self.form(request.form)
         

@@ -20,7 +20,6 @@
 				&#9776;
 			</button>
 			<a class="navbar-brand" href="/"><strong>스텝이꼬이면그것이탱고</strong></a>
-			<span>Hi {% if session_user %} {{ session_user.name }} {% else %} guest {% endif %} </span>
 		</div>
 		<div id="btn-nav-col" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -31,7 +30,7 @@
 					<a href="#about"><i class="fa fa-graduation-cap"></i>Profile</a>
 				</li>
 				<li>
-					<a href="#portfolio"><i class="fa fa-briefcase"></i>Portfolio</a>
+					<a href="#portfolio"><i class="fa fa-briefcase"></i>{% if session_user %} {{ session_user.name }} {% else %} guest {% endif %}</a>
 				</li>
 				{% if session_user %}
 				<li>
