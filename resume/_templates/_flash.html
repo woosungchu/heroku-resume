@@ -1,0 +1,9 @@
+{% macro render(catgory) %}
+
+{% with errors = get_flashed_messages(category_filter=[catgory]) %}
+  {% for msg in errors %}
+      <span class="error-msg">{{ msg }}</span>
+  {% endfor %}
+{% endwith %}
+
+{% endmacro %}
