@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request , redirect , url_for
+from flask import Blueprint, render_template, request , session, redirect , url_for
 from flask.views import MethodView
 from tumblelog.models import Post
 from flask_mongoengine.wtf import model_form
@@ -34,6 +34,7 @@ class ListView(MethodView):
         if form.validate():
             post = Post()
             form.populate_obj(post)
+            post.author = session['SESSION_USER']
             post.save()
             
             return redirect(url_for('tumblelog.list'))

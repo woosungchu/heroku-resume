@@ -1,3 +1,4 @@
+{% import "_flash.html" as flash %}
 {% macro render(form) -%}
 <script type="text/javascript">
 (function($){
@@ -45,11 +46,7 @@
 {% endfor %}
 	<div class="btn-line">
 		<a id="btn-new-user" class="btn btn-a" href="#" onclick="return false;">Submit</a>
-		{% with errors = get_flashed_messages() %}
-		  {% for msg in errors %}
-		      <span class="error-msg">{{ msg }}</span>
-		  {% endfor %}
-		{% endwith %}
+		{{flash.render('newAccount')}}
 	</div>
 </fieldset>
 </form>

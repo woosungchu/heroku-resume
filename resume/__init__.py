@@ -1,5 +1,6 @@
 from flask import Flask
-from flask_mongoengine import MongoEngine
+from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
+from flask_bcrypt import Bcrypt
 import os 
 
 #init
@@ -19,7 +20,10 @@ app.debug = app.config.get('DEBUG')
 
 #database
 db = MongoEngine(app)
+app.session_interface = MongoEngineSessionInterface(db)
 
+#bcrypt
+flask_bcrypt = Bcrypt(app)
 
 def register_blueprints(app) :
     from resume.views import index

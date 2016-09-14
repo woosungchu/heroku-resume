@@ -1,5 +1,17 @@
+{% import "_flash.html" as flash %}
 {% macro render(form) -%}
 <form id="form-login" action="." method="post">
+<script>
+(function($){
+	$(document).ready(function(){
+		$('#btn-login').click(function(){
+			$('#form-login').submit();
+		});
+		
+		
+	})//end ready
+})(jQuery)
+</script>
 <fieldset>
 {% for field in form %}
 {% if field.type in ['CSRFTokenField', 'HiddenField'] %}
@@ -23,12 +35,8 @@
 {% endif %}
 {% endfor %}
 	<div class="btn-line">
-		<a id="btn-new-user" class="btn btn-a" href="#" onclick="return false;">Log In</a>
-		{% with errors = get_flashed_messages() %}
-		  {% for msg in errors %}
-		      <span class="error-msg">{{ msg }}</span>
-		  {% endfor %}
-		{% endwith %}
+		<a id="btn-login" class="btn btn-a" href="#" onclick="return false;">Log In</a>
+		{{flash.render('login')}}
 	</div>
 </fieldset>
 </form>
