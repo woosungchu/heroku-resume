@@ -10,7 +10,7 @@
 		$('#submit-editor').on('click',function(){
 			//data-binding
 			obj.body = $content.html();
-			obj.title = $content.text().split(' ',4).join(' ');
+			obj.title = $content.text().split('\n')[0];
 			obj.title = obj.title.length < 30 ? obj.title : obj.title.substring(0,27)+"...";
 			obj.tags = "";
 			
