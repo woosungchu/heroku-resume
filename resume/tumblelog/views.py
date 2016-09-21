@@ -34,7 +34,7 @@ class ListView(MethodView):
         if form.validate():
             post = Post()
             form.populate_obj(post)
-            post.author = session['SESSION_USER']
+            post.author = session.get('SESSION_USER',None)
             post.save()
             
             return redirect(url_for('tumblelog.list'))
