@@ -6,6 +6,7 @@ from flask_mongoengine.wtf import model_form
 
 ROOT = '/tumblelog/'
 tumblelog = Blueprint('tumblelog',__name__,template_folder='_templates'+ROOT)
+STACKS = ['Flask','MongoDB','MongoEngine','jQuery']
 
 class ListView(MethodView):
     
@@ -14,12 +15,11 @@ class ListView(MethodView):
     def get_context(self):
         posts = Post.objects.all()
         form = self.form(request.form)
-        welcome = 'Hello Tumblelog'
         
         context = {
             "posts" : posts,
             "form" : form,
-            "welcome" : welcome 
+            "stack" : STACKS 
         }
         return context
     
@@ -46,7 +46,8 @@ class DetailView(MethodView):
         post = Post.objects.get_or_404(title=title)
     
         context = {
-            "post":post
+            "post":post,
+            'stack':STACKS
         }
         return context
 

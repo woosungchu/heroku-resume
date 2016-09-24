@@ -6,6 +6,7 @@ from resume import flask_bcrypt
 
 user = Blueprint('user',__name__,template_folder='_templates')
 ROOT = '/user/'
+STACKS = ['Flask','MongoDB','MongoEngine','jQuery','Flask-Bcrypt']
 
 class NewAccount(MethodView):
     form = model_form(User, exclude=['created_at'], field_args={'password': {'password':True}})
@@ -14,7 +15,8 @@ class NewAccount(MethodView):
         form = self.form(request.form)
          
         context = {
-            'form':form
+            'form':form,
+            "stack" : STACKS 
          }
         return context
     
@@ -41,7 +43,8 @@ class Login(MethodView):
     def get_context(self):
         form = self.form(request.form)
         context = {
-            'form':form
+            'form':form,
+            "stack" : STACKS 
         }
         return context
     

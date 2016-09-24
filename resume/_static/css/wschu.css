@@ -5,7 +5,8 @@ body {
 }
 
 body {
-	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+ 	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+/* 	font-family: 'Georgia', serif; */
 	line-height: 1.4em;
 /* 	background: #eeeeee; */
 	background-color: rgba(230,204,255,0.3);
@@ -14,8 +15,12 @@ body {
 	margin: 0 auto;
 }
 
-body .row > div {
-	background: rgba(255,255,224,0.5);
+a {
+	color : rgb(54,0,106);
+}
+
+#top-nav {
+	background-color: rgba(230,204,255,0.5);
 }
 
 /* common */

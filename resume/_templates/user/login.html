@@ -1,4 +1,5 @@
 {% import "user/_login_form.html" as forms %}
+{% import "_stack.html" as stacks %}
 {% extends "base.html" %}
 
 {% block subHead %}
@@ -11,6 +12,7 @@
 </div>
 <div class="col-md-4 hidden-sm">
 	<h2><a href="/">go back to root</a></h2>
+	{{stacks.render(stack)}}
 </div>
 </div>
 {% endblock %}
