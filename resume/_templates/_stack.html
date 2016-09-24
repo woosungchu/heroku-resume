@@ -1,0 +1,12 @@
+{% macro render(stack) -%}
+<div class="panel panel-success">
+  <div class="panel-heading">
+  	Stack
+  </div>
+  <ul class="list-group">
+   {% for item in stack %}
+   	<li class="list-group-item">{{item}}</li>
+   {% endfor %}
+  </ul>
+</div>
+{% endmacro %}
