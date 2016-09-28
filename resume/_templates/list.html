@@ -1,14 +1,89 @@
 {% extends "base.html" %}
 {% block subHead %}
 <style>
+#opening{
+	width :100%;
+	height:auto;
+	min-height: 600px;
+	text-align:center;
+}
+
+#console{
+	color:green;
+	min-height: 300px;
+	min-width:600px;
+	width: 65%;
+}
+
 </style>
+<script>
+(function($){
+	
+	$(document).ready(function(){
+// 		init();
+	});//end ready
+	
+	
+	var write = function($jqObj, str){
+		$jqObj.html('');
+		var delay = 0;
+		
+		for(var i = 0; i < str.length; i++){
+			(function(code){
+				if(code == '\\'){
+					code = '<br>';
+					delay = delay + 200;
+				}
+				setTimeout(function(){
+					$jqObj.append(code);
+		        }, 50 * i  + delay)
+			        
+			})(str.charAt(i))//end closure
+		}//end for
+	}
+	
+	var init = function(){
+		var firstGreeting = 'Hello, my new friend there \\' 
+							+ 'My name is Woosung Chu \\'
+							+'And this is my RESUME \\';
+		
+		write($('#console'),firstGreeting);
+	}
+	
+})(jQuery)
+
+</script>
 {% endblock %}
 
 
 {% block content %}
-<div class="row">
-<div class="jumbotron">
-	<img src="{{ url_for('static', filename='images/background.jpg') }}" width="100%" height="auto">
-</div>
+<!-- <div id="console"></div> -->
+<div id="opening" class="row">
+	<div><!-- header -->
+		<h2>Woosungchu</h2>
+		<ul class="breadcrumb">
+			<li><small>Junior Software Engineer</small></li>
+			<li><small>South Korea</small></li>
+			<li><small>woosungchu@gmail.com</small></li>
+			<li><small><a href="https://github.com/woosungchu">github.com/woosungchu</a></small></li>
+		</ul>
+	</div><!-- end header -->
+	<div id="body"><!-- body -->
+		<div id="stack">
+			{% for key,value in stacks.items() %}
+			<div class="panel panel-default col-md-8 col-md-offset-2">
+			  <div class="panel-heading">{{key}}</div>
+			  <div class="panel-body">
+			    {{value}}
+			  </div>
+			</div>
+			{% endfor %}
+		</div>
+		<div id="works">
+		
+		</div>
+	</div><!-- end body -->
+	<div id="footer"></div>
+	
 </div>
 {% endblock %}

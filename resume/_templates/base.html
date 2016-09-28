@@ -26,9 +26,9 @@
 				<li>
 					<a href="{{ url_for('tumblelog.list') }}"><span>Tumblelog</span></a>
 				</li>
-				<li>
-					<a href="#">Hello, {% if session.SESSION_USER %} {{ session.SESSION_USER.name }} {% else %} guest {% endif %}</a>
-				</li>
+<!-- 				<li> -->
+<!-- 					<a href="#">Hello, {% if session.SESSION_USER %} {{ session.SESSION_USER.name }} {% else %} guest {% endif %}</a> -->
+<!-- 				</li> -->
 				{% if session.SESSION_USER %}
 				<li>
 					<a href="{{ url_for('user.logout') }}">Logout</a>
