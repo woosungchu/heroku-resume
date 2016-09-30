@@ -10,10 +10,10 @@ STACKS = ['Flask','MongoDB','MongoEngine','jQuery']
 
 class ListView(MethodView):
     
-    form = model_form(Post, exclude=['created_at'])
+    form = model_form(Post, exclude=['created_at','author'])
     
     def get_context(self):
-        posts = Post.objects.all()
+        posts = Post.objects(hidden__ne=True)
         form = self.form(request.form)
         
         context = {

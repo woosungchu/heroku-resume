@@ -61,7 +61,6 @@ class Login(MethodView):
         try:
             user = User.objects.get(email=reqUser.email)
                 
-            print(user)
             if user and flask_bcrypt.check_password_hash(user.password,str.encode(reqUser.password)):
                 session_user = user
                 session['SESSION_USER'] = session_user

@@ -5,17 +5,19 @@
 	$(document).ready(function(){
 		var $textEditor = $('#a-text-editor')
 		var $content = $('#edit-body',$textEditor);
-		var obj = {	body:"", title:"", tags:""  };
+		var title,body,hidden;
 		
 		$('#submit-editor').on('click',function(){
 			
-			obj.body = $content.html();
-			obj.title = $content.text().split(/\s+/).slice(0,5).join(" ");
-			obj.tags = "";
+			body = $content.html();
+			title = $content.text().split(/\s+/).slice(0,5).join(" ");
+			if(title.length > 30) title= title.substring(0,27)+"...";
+			hidden = $('input[name=private]').is(':checked');
+				
+			$('[name=body]',$textEditor).val(body);
+			$('[name=title]',$textEditor).val(title);
+			$('[name=hidden]').prop('checked',hidden);
 			
-			for(var key in obj){
-				$('[name='+key+']',$textEditor).val(obj[key]);
-			}
 			//submit
 			$('form',$textEditor).submit();
 		});
@@ -34,8 +36,11 @@
 	</div><!--end hidden -->
 	
 	<div id="edit-body" contenteditable="true"></div>
-	<div class="btn-line clearfix">
-<!-- 		<input type="text" placeholder="#AddTags"> -->
+	<div class="btn-line clearfix text-right">
+	{% if session.SESSION_USER %}
+		<input id="private-post" type="checkbox" name="private"> 
+		<label for="private-post">private</label>
+	{% endif %}
 		<a href="#" id="submit-editor" class="btn btn-a float-right">WRITE</a>
 	</div>
 </div><!-- end text-editor -->
