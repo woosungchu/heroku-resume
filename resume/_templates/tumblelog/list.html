@@ -3,6 +3,62 @@
 {% extends "base.html" %}
 
 {% block subHead %}
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		
+		var running = false;
+		$(window).scroll(function() {
+			var endScroll = $(window).scrollTop() + $(window).height() > $(document).height() - 100;
+		    if(running == false && endScroll) {
+		    	running = true;
+		       
+				var page = $('div.post').length;
+			    $.ajax({
+			        type: 'GET',
+			        url: '/tumblelog/page/' + page + '/',
+			        success : function(posts){
+				    	$.each(posts,function(i,post){
+					    	var html = '';
+				    		var div, strBody, _d ,yy, mm, dd, HH, MM, strDate;
+			    		    
+				    		//body
+				    		div = document.createElement("div");
+				    		div.innerHTML = post.body 
+				    		strBody = div.innerText.substring(0,300);
+			    		    
+				    		//date
+			    		    _d = new Date(post.created_at.$date);   
+			    		    yy = _d.getFullYear();                  
+			    		    mm = _d.getMonth() + 1; // getMonth() is
+			    		    dd = _d.getDate();                      
+			    		    HH = _d.getHours();                     
+			    		    MM = _d.getMinutes();                   
+	
+			    		    strDate = yy+ (mm < 10 ? '.0':'.') + mm 
+			    						+ (dd < 10 ? '.0':'.') + dd + ' ' 
+			    						+ (HH < 10 ? '0':'') + HH +':'
+			    						+ (MM < 10 ? '0':'') + MM;  
+					    	
+					    	html += '<div class="post clearfix">'
+					    	html += '<h3><a href="/tumblelog/'+post.title.replace(' ','%20')+'/">'+post.title+'</a></h3>'
+					    	html += '<p>'+strBody+'</p>';
+					    	html += '<p>'+strDate+'</p>';
+					    	html += '</div>';
+					    	
+					    	$('#post-box').append(html);
+				    		
+				    	});//end each
+					    running = false;
+			        }//end callback
+			    });//end ajax
+			    
+		    }
+		});//end scrollevent
+		
+	})//end doc-ready
+})(jQuery)
+</script>
 {% endblock %}
 
 
@@ -10,15 +66,14 @@
 <div class="row">
 <div class="col-md-8">
 	<div>{{forms.render(form)}}</div>
-	
-	<div>
-	{% for post in posts %}
-		<div class="clearfix">
-	      <h3><a href="{{ url_for('tumblelog.detail', title=post.title) }}">{{ post.title }}</a></h3>
-	      <p>{{ post.body|striptags|truncate(300,True) }}</p>
-	      <p>{{ post.created_at.strftime('%Y.%m.%d %H:%M ') }}</p>
-    	</div>
-    {% endfor %}
+	<div id="post-box">
+		{% for post in posts %}
+		<div class="post clearfix">
+		     <h3><a href="{{ url_for('tumblelog.detail', title=post.title) }}">{{ post.title }}</a></h3>
+		     <p>{{ post.body|striptags|truncate(300,True) }}</p>
+		     <p>{{ post.created_at.strftime('%Y.%m.%d %H:%M ') }}</p>
+		</div>
+		{% endfor %}
 	</div>
 </div>
 <div class="col-md-4 hidden-sm">
