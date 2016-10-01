@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request , session, redirect , url_
 from flask.views import MethodView
 from tumblelog.models import Post
 from flask_mongoengine.wtf import model_form
+from mongoengine.queryset import Q
 
 
 ROOT = '/tumblelog/'
@@ -13,7 +14,8 @@ class ListView(MethodView):
     form = model_form(Post, exclude=['created_at','author'])
     
     def get_context(self):
-        posts = Post.objects(hidden__ne=True)
+        user = session.get('SESSION_USER',None)
+        posts = Post.objects.filter( Q(hidden=False) | Q(hidden=True,author=user))
         form = self.form(request.form)
         
         context = {
