@@ -1,0 +1,18 @@
+{% import "_stack.html" as stacks %}
+{% extends "base.html" %}
+
+{% block subHead %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-8">
+</div>
+<div class="col-md-4 hidden-sm">
+	<a href="/">
+		<h2>Fly High Root</h2>
+	</a>
+	{{stacks.render(stack)}}
+</div>
+</div><!-- endRow -->
+{% endblock %}

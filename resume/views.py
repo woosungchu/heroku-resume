@@ -6,9 +6,11 @@ index = Blueprint('index',__name__,template_folder='_templates')
 class Index(MethodView):
     
     stacks = {
+        #'Favorite Dev-Env':'Python, Flask, Backbone, MongoDB',
+        #'Skills':'Java, Spring, Python, Django, Flask, Backbone, Ember, Bootstrap, Mssql, Mysql, Oracle, MongoDB',
+        
         'Language':'Java, Python',
         'Framework':'Spring, Django, Flask, Ember, Bootstrap',
-#        'SQL':'Mssql,Mysql,Oracle,MongoDB',
         'OS':'Window, Ubuntu',
         'sql':'Mssql, Mysql, Oracle, MongoDB',
     }

@@ -29,9 +29,11 @@ def register_blueprints(app) :
     from resume.views import index
     from tumblelog.views import tumblelog
     from user.views import user
+    from todo.views import todo
     app.register_blueprint(index)
     app.register_blueprint(tumblelog)
     app.register_blueprint(user)
+    app.register_blueprint(todo)
 register_blueprints(app)
 
 if __name__ == '__main__' :
