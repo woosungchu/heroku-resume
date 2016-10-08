@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 import json
 
 ROOT = '/todo/'
+REST_URL = '/rest'+ROOT 
 todo = Blueprint('todo',__name__,template_folder='_templates'+ROOT)
 db  = MongoClient('mongodb://admin:admin@ds027425.mlab.com:27425/heroku_mr51rc25')
 coll = db['heroku_mr51rc25']
@@ -43,7 +44,7 @@ class TodoAPI(MethodView):
     
     def delete(self):
         pass
-    
+
     @classmethod
     def register(cls,todo):
         url = '/rest'+ROOT
@@ -51,7 +52,7 @@ class TodoAPI(MethodView):
         todo.add_url_rule(url,view_func=f,methods=['GET'])
         todo.add_url_rule(url,view_func=f,methods=['POST'])
         todo.add_url_rule(url+'<id>/',view_func=f,methods=['PUT','DELETE'])
-
+TodoAPI.register(todo)
 """
 @app.route(ROOT+'/')
 def hello_world():
