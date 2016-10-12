@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from flask_bcrypt import Bcrypt
+from pymongo import MongoClient
 import os 
 
 #init
@@ -20,6 +21,7 @@ app.debug = app.config.get('DEBUG')
 
 #database
 db = MongoEngine(app)
+db_pymongo = MongoClient(app.config.get('DB_HOST'))
 app.session_interface = MongoEngineSessionInterface(db)
 
 #bcrypt

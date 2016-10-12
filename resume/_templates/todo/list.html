@@ -10,7 +10,7 @@
 $(function(){
 // http://backbonejs.org/docs/todos.html
 var Todo = Backbone.Model.extend({
-	idAttribute: "_id",
+	idAttribute: "_id.$oid",
 	defaults : function(){
 		return {
 			title: "empty todo...",
@@ -28,7 +28,7 @@ var Todo = Backbone.Model.extend({
 var TodoList = Backbone.Collection.extend({
 	model:Todo,
 	//localStorage: new Backbone.LocalStorage("todos-backbone"),
-	url: '/rest/todo',
+	url: '/rest/todo/',
 	done: function(){
 		return this.where({done: true});
 	},
@@ -182,7 +182,7 @@ var App = new AppView;
     <div class="view">
       <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
       <label><%- title %></label>
-      <a class="destroy"></a>
+      <a class="destroy"><span class="glyphicon glyphicon-remove"></span></a>
     </div>
     <input class="edit" type="text" value="<%- title %>" />
   </script>

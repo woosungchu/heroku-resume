@@ -75,7 +75,8 @@
 	cursor: pointer;
 	width: 20px;
 	height: 20px;
-	background: url(/_static/images/destroy.png) no-repeat;
+/* 	background: url("_static/images/destroy.png") no-repeat; */
+/* 	background-color: black; */
 }
 
 #todo-list li:hover .destroy {
