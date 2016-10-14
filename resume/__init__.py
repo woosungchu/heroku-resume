@@ -21,7 +21,7 @@ app.debug = app.config.get('DEBUG')
 
 #database
 db = MongoEngine(app)
-db_pymongo = MongoClient(app.config.get('DB_HOST'))
+db_pymongo = MongoClient(app.config.get('DB_HOST')).get_default_database()
 app.session_interface = MongoEngineSessionInterface(db)
 
 #bcrypt
