@@ -5,7 +5,6 @@ from resume import db_pymongo
 import json, os
 
 ROOT = '/todo/'
-REST_URL = '/rest'+ROOT 
 todo = Blueprint('todo',__name__,template_folder='_templates'+ROOT)
 todos = db_pymongo['heroku_mr51rc25']['todo']
 STACKS = ['Flask','MongoDB','RESTful-API','jQuery']
@@ -32,20 +31,27 @@ todo.add_url_rule(ROOT,view_func=TodoView.as_view('list'))
 class TodoAPI(MethodView):
     
     def get(self):
-        return json_util.dumps(todos.find())
+        items =[]
+        for item in todos.find():
+            item['id'] = str(item['_id'])
+            del item['_id']
+            items.append(item)
+        return json_util.dumps(list(items), default=json_util.default)
     
     def post(self):
         todo = json_util.loads(request.data.decode('utf-8'))
         todos.save(todo)
         return json_util.dumps(todo)
     
-    def put(self):
+    def put(self,id):
         todo = json_util.loads(request.data.decode('utf-8'))
+        todo['_id']=ObjectId(todo['id'])
+        del todo['id']
         todos.save(todo)
         return json_util.dumps(todo)
     
-    def delete(self):
-        todos.remove(ObjectId(todo_id))
+    def delete(self,id):
+        todos.remove(ObjectId(id))
         return ""
 
     @classmethod
@@ -54,5 +60,5 @@ class TodoAPI(MethodView):
         f=cls.as_view('todo_api')
         todo.add_url_rule(url,view_func=f,methods=['GET'])
         todo.add_url_rule(url,view_func=f,methods=['POST'])
-        todo.add_url_rule(url+'<id>/',view_func=f,methods=['PUT','DELETE'])
+        todo.add_url_rule(url+'<id>',view_func=f,methods=['PUT','DELETE'])
 TodoAPI.register(todo)

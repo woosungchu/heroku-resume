@@ -10,7 +10,7 @@
 $(function(){
 // http://backbonejs.org/docs/todos.html
 var Todo = Backbone.Model.extend({
-	idAttribute: "_id.$oid",
+	idAttribute: "id",
 	defaults : function(){
 		return {
 			title: "empty todo...",
@@ -18,11 +18,9 @@ var Todo = Backbone.Model.extend({
 			done: false
 		};
 	},
-	
 	toggle: function(){
 		this.save({done: !this.get("done")});
 	}
-	
 });
 
 var TodoList = Backbone.Collection.extend({
@@ -50,9 +48,9 @@ var TodoView = Backbone.View.extend({
 	events: {
 		'click .toggle': 'toggleDone',
 		'dblclick .view': 'edit',
-		'click a.destory': 'clear',
-		'keypress .edit': 'updateOnEnter',
-		'blur .edit': 'close'
+		'click a.destroy': 'clear',
+		'keypress .edit': 'updateOnEnter',//PUT TWICE
+		'blur .edit': 'close'// PUT once
 	},
 	initialize: function(){
 		this.listenTo(this.model, 'change', this.render);
@@ -81,10 +79,13 @@ var TodoView = Backbone.View.extend({
 		}
 	},
 	updateOnEnter: function(e){
-		if(e.keyCode==13)this.close();
+		if(e.keyCode==13){
+			this.close();
+		}
 	},
 	clear: function(){
 		this.model.destroy();
+		this.remove();
 	}
 });
 
