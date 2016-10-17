@@ -15,6 +15,10 @@ class ListView(MethodView):
     form = model_form(Post, exclude=['created_at','author'])
     
     def get_context(self):
+        """
+        1. select Posts which hidden attribute is null or False(Not private post)
+        2. select Posts which author is user in session where its hidden attribute is True or False
+        """
         user = session.get('SESSION_USER',None)
         posts = Post.objects.filter( 
                     Q(hidden=None) | 
@@ -64,8 +68,8 @@ class MorePage(MethodView):
         
 class DetailView(MethodView):
     
-    def get_context(self,title):
-        post = Post.objects.get_or_404(title=title)
+    def get_context(self,id):
+        post = Post.objects.get_or_404(id=id)
     
         context = {
             "post":post,
@@ -73,10 +77,10 @@ class DetailView(MethodView):
         }
         return context
 
-    def get(self, title):
-        post = Post.objects.get_or_404(title=title)
-        return render_template(ROOT+'detail.html', post=post)
+    def get(self, id):
+        context = self.get_context(id)
+        return render_template(ROOT+'detail.html',  **context)
 
 tumblelog.add_url_rule(ROOT,view_func= ListView.as_view('list'))
-tumblelog.add_url_rule(ROOT+'<title>/',view_func= DetailView.as_view('detail'))
+tumblelog.add_url_rule(ROOT+'<id>/',view_func= DetailView.as_view('detail'))
 tumblelog.add_url_rule(ROOT+'page/<page>/',view_func= MorePage.as_view('page'))

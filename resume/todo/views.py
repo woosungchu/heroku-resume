@@ -7,7 +7,7 @@ import json, os
 ROOT = '/todo/'
 todo = Blueprint('todo',__name__,template_folder='_templates'+ROOT)
 todos = db_pymongo['todo']
-STACKS = ['Flask','MongoDB','RESTful-API','jQuery']
+STACKS = ['Flask','MongoDB','RESTful-API','Backbone.js']
 
 class TodoView(MethodView):
     
