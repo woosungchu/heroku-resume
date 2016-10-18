@@ -12,7 +12,7 @@ STACKS = ['Flask','MongoDB','MongoEngine','jQuery']
 
 class ListView(MethodView):
     
-    form = model_form(Post, exclude=['created_at','author'])
+    form = model_form(Post, exclude=['created_at','author','id'])
     
     def get_context(self):
         """
@@ -46,7 +46,7 @@ class ListView(MethodView):
             post = Post()
             form.populate_obj(post)
             post.author = session.get('SESSION_USER',None)
-            post.save()
+            post.save(validate=False) # To ignore NullException in ObjectIdField - should figure out better solution
             
             return redirect(url_for('tumblelog.list'))
         return render_template(ROOT+'list.html', **context)
