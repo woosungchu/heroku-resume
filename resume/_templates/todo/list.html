@@ -35,9 +35,12 @@ var TodoList = Backbone.Collection.extend({
 	},
 	nextOrder: function(){
 		if(!this.length) return 1;
-		return this.last().get('order') +1;
+		return _.max(this.models, function(item){return item.attributes.order}).attributes.order +1;
 	},
-	comparator: 'order'
+	comparator: function(todo){
+		var order =  ('000000' + todo.get("order")).slice(-6);
+		return [-todo.get('done') , order]
+	}
 });
 
 var Todos = new TodoList;
@@ -182,7 +185,7 @@ var App = new AppView;
   <script type="text/template" id="item-template">
     <div class="view">
       <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-      <label><%- order %></label>
+      <label><%- title %></label>
       <a class="destroy"><span class="glyphicon glyphicon-remove"></span></a>
     </div>
     <input class="edit" type="text" value="<%- title %>" />
