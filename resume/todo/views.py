@@ -30,25 +30,28 @@ todo.add_url_rule(ROOT,view_func=TodoView.as_view('list'))
 
 class TodoAPI(MethodView):
     
+    def swap_id(self,todo):
+        todo['id'] = str(todo['_id'])
+        del todo['_id']
+        return todo
+    
     def get(self):
         items =[]
         for item in todos.find():
-            item['id'] = str(item['_id'])
-            del item['_id']
-            items.append(item)
+            items.append(self.swap_id(item))
         return json_util.dumps(list(items), default=json_util.default)
     
     def post(self):
         todo = json_util.loads(request.data.decode('utf-8'))
         todos.save(todo)
-        return json_util.dumps(todo)
+        return json_util.dumps(self.swap_id(todo))
     
     def put(self,id):
         todo = json_util.loads(request.data.decode('utf-8'))
         todo['_id']=ObjectId(todo['id'])
         del todo['id']
         todos.save(todo)
-        return json_util.dumps(todo)
+        return json_util.dumps(self.swap_id(todo))
     
     def delete(self,id):
         todos.remove(ObjectId(id))
