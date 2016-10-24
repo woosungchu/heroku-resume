@@ -42,10 +42,9 @@
 			    						+ (HH < 10 ? '0':'') + HH +':'
 			    						+ (MM < 10 ? '0':'') + MM;  
 					    	
-			    						
 			    			//html
 					    	html += '<div class="post clearfix">'
-					    	html += '<h3><a href="/tumblelog/'+post.id+'/">'+post.title+'</a></h3>'
+					    	html += '<h3><a href="/tumblelog/'+post._id.$oid+'/">'+post.title+'</a></h3>'
 					    	html += '<p>'+strBody+'</p>';
 					    	html += '<p>'+strDate+'</p>';
 					    	html += '</div>';
