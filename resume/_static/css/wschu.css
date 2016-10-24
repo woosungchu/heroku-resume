@@ -66,5 +66,15 @@ a {
 }
 
 
+/* tumblelog */
+#post-box .post {
+	padding : 0px 5px;
+	margin : 10px 0px;
+	background: white;
+	border-top : 10px solid rgba(230,204,255,0.4);
+}
 
-
+#post-box .post h3{
+	margin-top : 5px;
+	font-weight: bold;
+}
