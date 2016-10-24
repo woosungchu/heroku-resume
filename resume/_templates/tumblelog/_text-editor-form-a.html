@@ -10,7 +10,8 @@
 		$('#submit-editor').on('click',function(){
 			
 			body = $content.html();
-			title = $content.text().split(/\s+/).slice(0,5).join(" ");
+			title = $content.find(':not(:empty)').first().text();
+// 			title = $content.text().split(/\s+/).slice(0,5).join(" ");
 			if(title.length > 30) title= title.substring(0,27)+"...";
 			hidden = $('input[name=private]').is(':checked');
 				
@@ -35,7 +36,7 @@
 		</form>
 	</div><!--end hidden -->
 	
-	<div id="edit-body" contenteditable="true"></div>
+	<div id="edit-body" contenteditable="true"><div><br></div></div>
 	<div class="btn-line clearfix text-right">
 	{% if session.SESSION_USER %}
 		<input id="private-post" type="checkbox" name="private"> 
